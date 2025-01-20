@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  user_id     Int          @id @default(autoincrement())
+  email       String       @db.VarChar(255)
+  pass_word   String?      @db.VarChar(255)
+  age         Int?
+  full_name   String       @db.VarChar(255)
+  avatar      String?      @db.VarChar(255)
+  google_id   String?      @db.VarChar(255)
+  face_app_id String?      @db.VarChar(255)
+  comments    comments[]
+  images      images[]
+  save_image  save_image[]
+}
+
+model images {
+  image_id    Int          @id @default(autoincrement())
+  image_name  String?      @db.VarChar(255)
+  image_url   String?      @db.VarChar(500)
+  description String?      @db.VarChar(255)
+  author_id   Int?
+  comments    comments[]
+  users       users?       @relation(fields: [author_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "images_ibfk_1")
+  save_image  save_image[]
+
+  @@index([author_id], map: "author_id")
+}
+
+model comments {
+  comment_id   Int       @id @default(autoincrement())
+  user_id      Int?
+  image_id     Int?
+  date_comment DateTime? @default(now()) @db.DateTime(0)
+  title        String?   @db.VarChar(255)
+  users        users?    @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "comments_ibfk_1")
+  images       images?   @relation(fields: [image_id], references: [image_id], onDelete: NoAction, onUpdate: NoAction, map: "comments_ibfk_2")
+
+  @@index([image_id], map: "image_id")
+  @@index([user_id], map: "user_id")
+}
+
+model save_image {
+  user_id   Int
+  image_id  Int
+  date_save DateTime? @default(now()) @db.DateTime(0)
+  users     users     @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "save_image_ibfk_1")
+  images    images    @relation(fields: [image_id], references: [image_id], onDelete: NoAction, onUpdate: NoAction, map: "save_image_ibfk_2")
+
+  @@id([user_id, image_id])
+  @@index([image_id], map: "image_id")
+}
