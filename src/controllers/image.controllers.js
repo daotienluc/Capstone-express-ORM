@@ -67,6 +67,28 @@ const imageController = {
       next(error);
     }
   },
+  getListImageById: async (req, res, next) => {
+    try {
+      const data = await imageService.getListImageById(req);
+      const resData = responseSuccess(data, data.message, 200);
+      res.status(resData.code).json(resData);
+    } catch (error) {
+      next(error);
+    }
+  },
+  saveCommentById: async (req, res, next) => {
+    try {
+      const data = await imageService.saveCommentById(req);
+      const resData = responseSuccess(
+        data,
+        "Save Comment by id Successfully",
+        200
+      );
+      res.status(resData.code).json(resData);
+    } catch (error) {
+      next(error);
+    }
+  },
 };
 
 export default imageController;

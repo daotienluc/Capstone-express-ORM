@@ -39,7 +39,7 @@ model comments {
   user_id      Int?
   image_id     Int?
   date_comment DateTime? @default(now()) @db.DateTime(0)
-  title        String?   @db.VarChar(255)
+  content      String?   @db.VarChar(255)
   users        users?    @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "comments_ibfk_1")
   images       images?   @relation(fields: [image_id], references: [image_id], onDelete: NoAction, onUpdate: NoAction, map: "comments_ibfk_2")
 
