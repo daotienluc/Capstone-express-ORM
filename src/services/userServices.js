@@ -21,8 +21,7 @@ const userService = {
       }
     })
     return user
-  },
-
+  }
 };
 
 export default userService;

@@ -68,6 +68,14 @@ const imageService = {
     });
     return data;
   },
+  getListImagesSavedByUserId: async (userId) => {
+    const images = await prisma.images.findMany({
+      where: {
+        author_id: +userId
+      }
+    })
+    return images
+  }
 };
 
 export default imageService;

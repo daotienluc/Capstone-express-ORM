@@ -26,4 +26,6 @@ imageRouter.get("/getCommentById/:id", imageController.getCommentById);
 // lưu thông tin bình luận của người dùng với ảnh
 imageRouter.post("/saveCommentById", imageController.saveCommentById);
 
+imageRouter.get("/get-list-images-saved-by-user-id", imageController.getListImagesSavedByUserId);
+
 export default imageRouter;
