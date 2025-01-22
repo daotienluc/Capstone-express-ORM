@@ -27,5 +27,7 @@ imageRouter.get("/getCommentById/:id", imageController.getCommentById);
 imageRouter.post("/saveCommentById", imageController.saveCommentById);
 
 imageRouter.get("/get-list-images-saved-by-user-id", imageController.getListImagesSavedByUserId);
+imageRouter.get("/get-list-images-created-by-user-id", imageController.getListImagesCreatedByUserId);
+imageRouter.delete("/delete-image-by-image-id", imageController.deleteImageByImageId);
 
 export default imageRouter;
