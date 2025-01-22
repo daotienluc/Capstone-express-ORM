@@ -68,6 +68,30 @@ const imageService = {
     });
     return data;
   },
+  getListImagesSavedByUserId: async (userId) => {
+    const images = await prisma.save_image.findMany({
+      where: {
+        user_id: +userId
+      }
+    })
+    return images
+  },
+  getListImagesCreatedByUserId: async (userId) => {
+    const images = await prisma.images.findMany({
+      where: {
+        author_id: +userId
+      }
+    })
+    return images
+  },
+  deleteImageByImageId: async (imageId) => {
+    const imageDeleted = await prisma.images.delete({
+      where: {
+        image_id: +imageId
+      }
+    })
+    return imageDeleted
+  }
 };
 
 export default imageService;

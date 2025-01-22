@@ -89,6 +89,36 @@ const imageController = {
       next(error);
     }
   },
+  getListImagesSavedByUserId: async (req, res, next) => {
+    const { user_id } = req.query
+    try {
+      const data = await imageService.getListImagesSavedByUserId(user_id)
+      const resData = responseSuccess(data, `Get list images saved by user id successfully.`, 200)
+      res.status(resData.code).json(resData)
+    } catch (error) {
+      next(error)
+    }
+  },
+  getListImagesCreatedByUserId: async (req, res, next) => {
+    const { user_id } = req.query
+    try {
+      const data = await imageService.getListImagesCreatedByUserId(user_id)
+      const resData = responseSuccess(data, `Get list images created by user id successfully.`, 200)
+      res.status(resData.code).json(resData)
+    } catch (error) {
+      next(error)
+    }
+  },
+  deleteImageByImageId: async (req, res, next) => {
+    const { image_id } = req.query
+    try {
+      const data = await imageService.deleteImageByImageId(image_id)
+      const resData = responseSuccess(data, `Deleled image with id = ${image_id} successfully`, 200)
+      res.status(resData.code).json(resData) 
+    } catch (error) {
+      next(error)
+    }
+  }
 };
 
 export default imageController;
