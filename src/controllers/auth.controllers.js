@@ -1,5 +1,5 @@
 import { responseSuccess } from "../common/helpers/reposonse.helper.js";
-import authService from "../services/authServices.js";
+import authService from "../services/auth.services.js";
 
 const authController = {
   register: async (req, res, next) => {

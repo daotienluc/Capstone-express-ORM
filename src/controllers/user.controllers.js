@@ -1,5 +1,5 @@
 import { responseSuccess } from "../common/helpers/reposonse.helper.js";
-import userService from "../services/userServices.js";
+import userService from "../services/user.services.js";
 
 const userController = {
   getAllUser: async (req, res, next) => {
